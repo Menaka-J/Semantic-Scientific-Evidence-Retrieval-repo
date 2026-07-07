@@ -16,13 +16,31 @@ class DatasetLoader:
 
                 paper=json.loads(line)
 
-                abstract=" ".join(paper["abstract"])
+                # abstract=" ".join(paper["abstract"])
+                abstract = " ".join(
+
+    paper.get(
+
+        "abstract",
+
+        []
+
+    )
+
+)
 
                 papers.append({
 
                     "doc_id":paper["doc_id"],
 
-                    "title":paper["title"],
+                    # "title":paper["title"],
+                    "title": paper.get(
+
+    "title",
+
+    "Unknown"
+
+),
 
                     "abstract":abstract,
 
