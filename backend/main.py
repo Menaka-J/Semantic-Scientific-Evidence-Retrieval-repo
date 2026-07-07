@@ -11,6 +11,7 @@ from app.preprocessing.text_preprocessor import TextPreprocessor
 from app.retrieval.tfidf_retriever import TFIDFRetriever
 
 from app.retrieval.bm25_retriever import BM25Retriever
+from app.services.statistics import DatasetStatistics
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -57,6 +58,8 @@ app.add_middleware(
     allow_headers=["*"]
 
 )
+
+stats = DatasetStatistics(papers)
 
 @app.get("/")
 
@@ -121,3 +124,9 @@ def bm25_search(
         top_k
 
     )
+    
+@app.get("/statistics")
+
+def statistics():
+
+    return stats.summary()
