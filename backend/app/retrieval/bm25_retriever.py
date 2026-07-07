@@ -25,30 +25,32 @@ class BM25Retriever:
 
     def search(self, query, top_k=10):
 
-        tokens = self.preprocessor.preprocess(
-
-            query
-
-        ).split()
+        tokens = self.preprocessor.preprocess(query).split()
 
         scores = self.bm25.get_scores(tokens)
 
         ranked = scores.argsort()[::-1]
 
+        max_score = max(scores) if len(scores) > 0 else 1
+
         results = []
 
         for idx in ranked[:top_k]:
 
-            results.append({
+          normalized_score = scores[idx] / max_score if max_score > 0 else 0
 
-                "doc_id": self.papers[idx]["doc_id"],
+          results.append({
 
-                "title": self.papers[idx]["title"],
+            "doc_id": self.papers[idx]["doc_id"],
 
-                "abstract": self.papers[idx]["abstract"],
+            "title": self.papers[idx]["title"],
 
-                "score": float(scores[idx])
+            "abstract": self.papers[idx]["abstract"],
 
-            })
+            "score": float(normalized_score),
+
+            "raw_score": float(scores[idx])
+
+        })
 
         return results
