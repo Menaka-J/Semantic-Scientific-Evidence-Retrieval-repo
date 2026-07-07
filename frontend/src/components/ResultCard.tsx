@@ -1,37 +1,31 @@
-interface Props{
-
-    result:any;
-
+interface Props {
+  result: any;
 }
 
-export default function ResultCard({result}:Props){
+export default function ResultCard({ result }: Props) {
+  return (
+    <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition">
 
-    return(
+      <div className="flex justify-between">
 
-        <div className="bg-white rounded shadow p-5">
+        <h2 className="text-xl font-bold text-slate-800">
+          {result.title}
+        </h2>
 
-            <h2 className="font-bold text-lg">
-
-                {result.title}
-
-            </h2>
-
-            <p className="mt-3">
-
-                {result.abstract}
-
-            </p>
-
-            <div className="mt-3">
-
-                Similarity :
-
-                {result.score.toFixed(4)}
-
-            </div>
-
+        <div className="bg-blue-600 text-white rounded-lg px-3 py-1 h-fit">
+          {result.score.toFixed(3)}
         </div>
 
-    );
+      </div>
 
+      <p className="text-gray-700 mt-5 leading-7">
+        {result.abstract}
+      </p>
+
+      <div className="mt-5 text-gray-500">
+        Document ID : {result.doc_id}
+      </div>
+
+    </div>
+  );
 }

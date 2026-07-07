@@ -33,7 +33,7 @@ export default function Home() {
         },
       });
 
-      setResults(response.data);
+      setResults(response.data.results);
     } catch (error) {
       console.error(error);
       alert("Search failed.");
