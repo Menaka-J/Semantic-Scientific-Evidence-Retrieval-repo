@@ -28,6 +28,7 @@ export default function SearchBar({ onSearch }: Props) {
         >
           <option value="tfidf">TF-IDF</option>
           <option value="bm25">BM25</option>
+          <option value="semantic">Semantic Search </option>
         </select>
 
         <button

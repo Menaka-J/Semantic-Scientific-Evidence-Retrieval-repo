@@ -46,7 +46,8 @@ def root():
         "documents": len(papers),
         "methods": [
             "tfidf",
-            "bm25"
+            "bm25",
+            "semantic"
         ]
     }
 
